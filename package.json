@@ -1,0 +1,18 @@
+{
+    "name": "valorant-de-client",
+    "productName": "VALORANT DE Client | v0.1",
+    "version": "v0.1.0",
+    "author": "HenrikDev",
+    "description": "---",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "discord-rich-presence": "0.0.8"
+    },
+    "devDependencies": {
+        "electron": "^12.0.2"
+    }
+}
