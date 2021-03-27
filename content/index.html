@@ -1,11 +1,55 @@
 <html>
     <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
     </head>
     <body>
-        <button type="submit">#1</button>
-        <button type="submit">#2</button>
-        <p id="testtext"></p>
+        <div style="display: flex;vertical-align: middle;align-items: flex-end;height: 100%;">
+            <div style="width: 2%;"></div>
+            <div class="card" style="width: 30%;height: 90%">
+                <img class="card-img-top" src="Launch Valorant.png" alt="Card image cap">
+                <div class="card-body" style="vertical-align: middle">
+                    <a type="button" class="btn btn-lg btn-block btn-primary" id="launchvalorant" style="color:#fff;background-color:#ff4654">Launch</a>
+                </div>
+            </div>
+            <div style="width: 3%;"></div>
+            <div class="card" style="width: 30%;height: 90%;">
+                <img class="card-img-top" src="Create_Lobby.png" alt="Card image cap">
+                <div class="card-body">
+                    <div class="form-check">
+                        <label class="form-check-label" style="color:#fff">
+                            <input class="form-check-input" type="checkbox" value="">
+                            Public Lobby
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                        <div style="height: 20px;"></div>
+                        <label class="form-check-label" style="color:#fff">
+                            <input class="form-check-input" type="checkbox" value="">
+                            Füge MMR Daten hinzu
+                            <span class="form-check-sign">
+                                <span class="check"></span>
+                            </span>
+                        </label>
+                    </div>
+                    <div style="height: 10px;"></div>
+                    <a type="button" class="btn btn-lg btn-block btn-primary" id="createlobby" style="color:#fff;background-color:#ff4654">Erstelle Lobby</a>
+                </div>
+            </div>
+            <div style="width: 3%;"></div>
+            <div class="card" style="width: 30%;height: 90%;">
+                <img class="card-img-top" src="Join_Lobby.png" alt="Card image cap">
+                <div class="card-body">
+                    <a type="button" class="btn btn-lg btn-block btn-primary" id="joinlobby" style="color:#fff;background-color:#ff4654">Trete Lobby bei</a>
+                </div>
+            </div>
+        </div>
     </body>
     <script>
     </script>
+    <script src="js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="js/core/popper.min.js" type="text/javascript"></script>
+    <script src="js/core/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/now-ui-kit.js" type="text/javascript"></script>
 </html>

@@ -1,0 +1,16 @@
+html {
+    height: 100%;
+}
+body {
+    background-image: linear-gradient(rgba(253,92,81,255), rgba(192,16,103,255));
+    background-size: 100%;
+    color: #2c2c2c;
+    font-size: 14px;
+    font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    vertical-align: middle;
+    top: 10%;
+}

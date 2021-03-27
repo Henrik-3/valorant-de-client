@@ -6,9 +6,11 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1000,
         height: 600,
-        icon: "./content/VALORANT_D_TRANSPARENT.png"
+        icon: "./content/VALORANT_D_TRANSPARENT.png",
     })
     win.loadFile("./content/index.html")
+    win.setResizable(false)
+    win.setMenuBarVisibility(false)
 }
 
 app.whenReady().then(() => {
