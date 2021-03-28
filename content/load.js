@@ -1,17 +1,27 @@
 
 const LocalRiotClientAPI = require("./LocalRiotClient.js")
-const localRiotClientAPI = LocalRiotClientAPI.initFromLockFile()
+var localRiotClientAPI = LocalRiotClientAPI.initFromLockFile()
 const config = require("../config/config.json")
 const client = require("discord-rich-presence")(config.clientid)
 
 async function presencef() {
+    var status
     if(localRiotClientAPI != "No File Found") {
+        await localRiotClientAPI.getPresence().then(response => {
+            //console.log(response.data.presences)
+            status = response.status
+        }).catch(error => {
+            status = error
+        })
+    } else {
+        status = null
+    }
+    if(status != null) {
         var presence
         await localRiotClientAPI.getPresence().then(response => {
             //console.log(response.data.presences)
             presence = response.data.presences
         }).catch(error => {
-            console.log(error)
             return error
         })
         return presence
@@ -21,7 +31,19 @@ async function presencef() {
 }
 
 async function puuid() {
+    var status
     if(localRiotClientAPI != "No File Found") {
+        await localRiotClientAPI.getPresence().then(response => {
+            //console.log(response.data.presences)
+            status = response.status
+        }).catch(error => {
+            console.log(error)
+            status = error
+        })
+    } else {
+        status = null
+    }
+    if(status != null) {
         var puuid 
         await localRiotClientAPI.getSession().then(response => {
             puuid = response.data.puuid

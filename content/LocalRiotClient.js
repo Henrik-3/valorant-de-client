@@ -43,6 +43,15 @@ class LocalRiotClientAPI {
         }
     }
 
+    static valactive(path = null) {
+        const lockFile = this.parseLockFile(path);
+        if(lockFile != "No File found") {
+            return true;
+        } else {
+            return false
+        }
+    }
+
     static parseLockFile(path = null) {
 
         /**
@@ -96,6 +105,16 @@ class LocalRiotClientAPI {
 
     getHelp() {
         return this.axios.get('/help');
+    }
+
+    getCredentials() {
+        return this.axios.get("/entitlements/v1/token")
+    }
+
+    getServerRegion() {
+        return this.axios.post("player-affinity/product/v1/token", {
+            product: "valorant"
+        })
     }
 }
 

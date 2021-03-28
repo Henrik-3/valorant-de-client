@@ -1,6 +1,7 @@
 const {app, BrowserWindow, Tray} = require("electron")
 const path = require("path")
 const load = require("./content/load.js")
+const api = require("./content/api.js")
 
 function createWindow() {
     const win = new BrowserWindow({
