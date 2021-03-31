@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    </head>
+    <body>
+        <div class="sidebar-val-client">
+            <i class="fas fa-house-user active" href="#" type="button"></i>
+            <i class="fas fa-cogs" href="#" type="button"></i>
+        </div>
+        <div class="content-val-client" style="display: flex;vertical-align: middle;align-items: flex-end;height: 100%;">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="height: 90%;margin-bottom: 4.5%;width: 75%;">
+                <ol class="carousel-indicators" style="margin-bottom: 0px;">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1" class="active"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item">
+                    <div class="card" style="width: 50%;height: 100%;box-shadow: none;background-color: transparent;">
+                        <div class="card-body">
+                            <img class="card-img-top" src="Create_Lobby.png" alt="Card image cap">
+                            <div class="form-check">
+                                <label class="form-check-label" style="color:#fff">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    Public Lobby
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                                <div style="height: 20px;"></div>
+                                <label class="form-check-label" style="color:#fff">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    Füge MMR Daten hinzu
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div style="height: 10px;"></div>
+                            <a type="button" class="btn btn-lg btn-block btn-primary" id="createlobby" style="color:#fff;background-color:#ff4654">Erstelle Lobby</a>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item active">
+                    <div class="card" style="width: 50%;height: 100%;box-shadow: none;background-color: transparent;">
+                        <img class="card-img-top" src="Join_Lobby.png" alt="Card image cap">
+                        <div class="card-body">
+                            <div class="input-group no-border input-lg" id="">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-tags" style="color: white;"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Party ID" id="lobbyid">
+                            </div>
+                            <a type="button" class="btn btn-lg btn-block btn-primary" id="joinlobby" style="color:#fff;background-color:#ff4654">Trete Lobby bei</a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <i class="carousel-control-prev-icon"></i>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <i class="carousel-control-next-icon"></i>
+                </a>
+            </div>
+            <div style="margin-left:5%;"></div>
+            <div class="card" style="width:22.5%;height: 92.5%;top: 10px;">
+                <div class="card-body">
+                    <h3 class="card-title" style="color: white;align-items: flex-end;"> Freundesliste</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+    </script>
+    <script src="js/core/jquery.min.js" type="text/javascript"></script>
+    <script src="js/core/popper.min.js" type="text/javascript"></script>
+    <script src="js/core/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/now-ui-kit.js" type="text/javascript"></script>
+    <script src="js/ui.js" type="text/javascript"></script>
+</html>

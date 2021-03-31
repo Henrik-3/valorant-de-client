@@ -4,6 +4,7 @@ const axios = require("axios")
 const exec = require("child_process").execFile
 const LocalRiotClientAPI = require("./LocalRiotClient.js")
 var localRiotClientAPI = LocalRiotClientAPI.initFromLockFile()
+const eapp = require('electron').app
 
 app.get("/ingame/v1/join/:id", async (req, res) => {
     var id = req.params.id
@@ -42,7 +43,7 @@ app.get("/ingame/v1/join/:id", async (req, res) => {
         })
 
         var open_success
-        await axios.post(`https://glz-${server_region}-1.${server_region}.a.pvp.net/parties/v1/players/${credentials_data.subject}/joinparty/${id}`, {Accessibility: "OPEN"}, {
+        await axios.post(`https://glz-${server_region}-1.${server_region}.a.pvp.net/parties/v1/players/${credentials_data.subject}/joinparty/${id}`, {}, {
             headers: {
                 "Authorization": `Bearer ${credentials_data.accessToken}`,
                 "X-Riot-Entitlements-JWT": credentials_data.token,
@@ -128,27 +129,28 @@ app.get("/ingame/v1/create", async (req, res) => {
     }
 })
 
+app.get("/client/v1/settings", async (req, res) => {
+
+})
+
+app.post("/client/v1/restart", async (req, res) => {
+    eapp.relaunch()
+    eapp.exit()
+    res.send(200)
+})
+
 app.get("/client/v1/status", async (req, res) => {
-    var status
-    if(localRiotClientAPI != "No File Found" || localRiotClientAPI != 503) {
-        await localRiotClientAPI.getHelp().then(response => {
-            //console.log(response.data.presences)
-            status = response.status
-        }).catch(error => {
-            if(error.response.status != undefined) {
-                status = error.response.status
-            } else {
-                status = 500
+    exec("tasklist", (error, stdout, stderr) => {
+        if(error) return
+        var tasks = stdout.toString().split("\n")
+        var bset = false
+        for(let i = 0; tasks.length > i; i++) {
+            if(tasks[i].includes("VALORANT")) {
+                res.send(200)
             }
-        })
-    } else {
-        status = 500
-    }
-    if(status == 200 || status == 401) {
-        res.send(200)
-    } else {
-        res.send(400)
-    }
+        }
+        bset == false ? res.send(404) : null
+    })
 })
 
 app.post("/client/v1/launch", async (req, res) => {
@@ -162,10 +164,6 @@ app.post("/client/v1/launch", async (req, res) => {
         }
     })
     res.send(status)
-})
-
-app.post("/client/v1/launch/join", async (req, res) => {
-    
 })
 
 app.listen(42069, () => {console.log("API Online")})

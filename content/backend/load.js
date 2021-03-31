@@ -1,22 +1,23 @@
 
 const LocalRiotClientAPI = require("./LocalRiotClient.js")
 var localRiotClientAPI = LocalRiotClientAPI.initFromLockFile()
-const config = require("../config/config.json")
+const config = require("../../config/config.json")
+const { default: axios } = require("axios")
+const { response } = require("express")
 const client = require("discord-rich-presence")(config.clientid)
 
-async function presencef() {
+async function getValoStatus() {
     var status
-    if(localRiotClientAPI != "No File Found") {
-        await localRiotClientAPI.getPresence().then(response => {
-            //console.log(response.data.presences)
-            status = response.status
-        }).catch(error => {
-            status = error
-        })
-    } else {
-        status = null
-    }
-    if(status != null) {
+    await axios.get("http://127.0.0.1/client/v1/status").then(response => {
+        status = true
+    }).catch(error => {
+        status = false
+    })
+    return status
+}
+
+async function presencef() {
+    if(await getValoStatus() != false) {
         var presence
         await localRiotClientAPI.getPresence().then(response => {
             //console.log(response.data.presences)
@@ -31,19 +32,7 @@ async function presencef() {
 }
 
 async function puuid() {
-    var status
-    if(localRiotClientAPI != "No File Found") {
-        await localRiotClientAPI.getPresence().then(response => {
-            //console.log(response.data.presences)
-            status = response.status
-        }).catch(error => {
-            console.log(error)
-            status = error
-        })
-    } else {
-        status = null
-    }
-    if(status != null) {
+    if(await getValoStatus() != false) {
         var puuid 
         await localRiotClientAPI.getSession().then(response => {
             puuid = response.data.puuid
@@ -59,18 +48,19 @@ async function puuid() {
 
 var startTime = new Date()
 var cpuuid
-if(localRiotClientAPI != "No File Found") {
-    async function fetchpuuid() {
+async function startup() {
+    if(await getValoStatus() != false) {
         cpuuid = await puuid()
+        fetchpuuid()
+        client.updatePresence({
+            state: "Client Startup",
+            largeImageKey: "logo-val",
+            startTimestamp: startTime,
+            instance: true
+        })
     }
-    fetchpuuid()
-    client.updatePresence({
-        state: "Client Startup",
-        largeImageKey: "logo-val",
-        startTimestamp: startTime,
-        instance: true
-    })
 }
+startup()
 
 var maps = {
     '/Game/Maps/Triad/Triad': "Haven",

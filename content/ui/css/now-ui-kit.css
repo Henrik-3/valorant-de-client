@@ -31,11 +31,33 @@ html {
   height: 100%;
 }
 
-.watermark {
-  display: none;
+.sidebar-val-client {
+  position: fixed;
+  height: 100%;
+  width: 50px;
+  overflow: auto;
+  background-color: #3D4849;
 }
-.embed-cake-unit {
-  display: none;
+
+.sidebar-val-client i {
+  display: block;
+  color: #fff;
+  padding: 16px;
+  text-decoration: none;
+}
+
+.sidebar-val-client i.active {
+  display: block;
+  color: #fff;
+  padding: 16px;
+  text-decoration: none;
+  background-color: #282c2c;
+}
+
+.content-val-client {
+  margin-left: 50px;
+  padding: 1px 16px;
+  height: 100%;
 }
 
 .bootstrap-switch {

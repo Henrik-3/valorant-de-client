@@ -33,31 +33,38 @@
     }, 10000)
 })*/
 
-var created = false
-document.querySelector("#createlobby").addEventListener("click", async () => {
-
-if(created == false) {
-    document.getElementById("createlobby").innerHTML = "Wird erstellt..."
-    async function createLobby() {
-        var response = await fetch("http://127.0.0.1:42069/ingame/v1/create", {
-            method: "GET"
+document.querySelector("#launchvalorant").addEventListener("click", async () => {
+    async function restart() {
+        var response = await fetch("http://127.0.0.1:42069/client/v1/restart", {
+            method: "POST"
         })
         return response
     }
-    var data_data
-    await createLobby().then(data2 => data2.json()).then(data3 => {
-        data_data = data3
-    })
-    console.log(data_data)
-    if(data_data != undefined) {
-        created = true
-        document.getElementById("createlobby").innerHTML = "Lobby erstellt"
-        document.getElementById("createlobby").style.cssText = "color:#fff;background-color:#696969"
-        document.getElementById("partyid").innerHTML = data_data.party_id
-    } else {
-        document.getElementById("createlobby").innerHTML = "Fehler bei der Lobby Erstellung, stelle sicher dass du VALORANT offen hast"
+    restart()
+})
+
+var created = false
+document.querySelector("#createlobby").addEventListener("click", async () => {
+    if(created == false) {
+        document.getElementById("createlobby").innerHTML = "Wird erstellt..."
+        async function createLobby() {
+            var response = await fetch("http://127.0.0.1:42069/ingame/v1/create", {
+                method: "GET"
+            })
+            return response
+        }
+        var data_data
+        await createLobby().then(data2 => data2.json()).then(data3 => {data_data = data3})
+        console.log(data_data)
+        if(data_data != undefined) {
+            created = true
+            document.getElementById("createlobby").innerHTML = "Lobby erstellt"
+            document.getElementById("createlobby").style.cssText = "color:#fff;background-color:#696969"
+            document.getElementById("partyid").innerHTML = data_data.party_id
+        } else {
+            document.getElementById("createlobby").innerHTML = "Fehler bei der Lobby Erstellung, stelle sicher dass du VALORANT offen hast"
+        }
     }
-}
 })
 
 document.querySelector("#joinlobby").addEventListener("click", async () => {

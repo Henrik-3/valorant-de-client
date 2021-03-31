@@ -1,13 +1,13 @@
 {
     "name": "valorant-de-client",
-    "productName": "VALORANT DE Client | v0.1.1 b3",
-    "version": "0.1.1",
+    "productName": "VALORANT DE Client | v0.2.0 b14",
+    "version": "0.2.0",
     "author": "HenrikDev",
     "description": "---",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "packager": "electron-packager ./ --platform=win32"
+        "packager": "electron-packager ./ --production --asar --overwrite"
     },
     "dependencies": {
         "axios": "^0.21.1",
@@ -16,20 +16,5 @@
     },
     "devDependencies": {
         "electron": "^12.0.2"
-    },
-    "build": {
-        "productName": "VALORANT DE Client",
-        "appId": "valorantde-client",
-        "win": {
-            "target": ["portable"]
-        },
-        "portable": {
-            "artifactName": "valorantde_client.exe"
-        },
-        "directories": {
-            "output": "electron/output",
-            "app": "electron/app",
-            "buildResources": "electron/buildResources"
-        }
     }
 }
