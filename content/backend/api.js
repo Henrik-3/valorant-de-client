@@ -5,6 +5,8 @@ const exec = require("child_process").execFile
 const LocalRiotClientAPI = require("./LocalRiotClient.js")
 var localRiotClientAPI = LocalRiotClientAPI.initFromLockFile()
 const eapp = require('electron').app
+const util = require("util")
+const exectasklist = util.promisify(require('child_process').exec)
 
 app.get("/ingame/v1/join/:id", async (req, res) => {
     var id = req.params.id
@@ -140,16 +142,16 @@ app.post("/client/v1/restart", async (req, res) => {
 })
 
 app.get("/client/v1/status", async (req, res) => {
-    exec("tasklist", (error, stdout, stderr) => {
+    await exectasklist("tasklist", (error, stdout, stderr) => {
         if(error) return
         var tasks = stdout.toString().split("\n")
         var bset = false
         for(let i = 0; tasks.length > i; i++) {
-            if(tasks[i].includes("VALORANT")) {
-                res.send(200)
+            if(tasks[i].includes("VALORANT-Win64-Shipping")) {
+                bset = true
             }
         }
-        bset == false ? res.send(404) : null
+        bset == false ? res.send("404") : res.send("200")
     })
 })
 

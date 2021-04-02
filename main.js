@@ -3,7 +3,6 @@ const path = require("path")
 const load = require("./content/backend/load.js")
 const api = require("./content/backend/api.js")
 const util = require("util")
-const exec = require('child_process').exec;
 const exectasklist = util.promisify(require('child_process').exec)
 
 app.whenReady().then(async () => {

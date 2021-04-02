@@ -8,7 +8,7 @@ const client = require("discord-rich-presence")(config.clientid)
 
 async function getValoStatus() {
     var status
-    await axios.get("http://127.0.0.1/client/v1/status").then(response => {
+    await axios.get("http://127.0.0.1:42069/client/v1/status").then(response => {
         status = true
     }).catch(error => {
         status = false
@@ -49,15 +49,14 @@ async function puuid() {
 var startTime = new Date()
 var cpuuid
 async function startup() {
+    client.updatePresence({
+        state: "Client Startup",
+        largeImageKey: "logo-val",
+        startTimestamp: startTime,
+        instance: true
+    })
     if(await getValoStatus() != false) {
         cpuuid = await puuid()
-        fetchpuuid()
-        client.updatePresence({
-            state: "Client Startup",
-            largeImageKey: "logo-val",
-            startTimestamp: startTime,
-            instance: true
-        })
     }
 }
 startup()
