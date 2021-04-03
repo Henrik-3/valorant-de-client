@@ -7,6 +7,7 @@ var localRiotClientAPI = LocalRiotClientAPI.initFromLockFile()
 const eapp = require('electron').app
 const util = require("util")
 const exectasklist = util.promisify(require('child_process').exec)
+const shell = require('electron').shell
 
 app.get("/ingame/v1/join/:id", async (req, res) => {
     var id = req.params.id
@@ -135,6 +136,16 @@ app.get("/client/v1/settings", async (req, res) => {
 
 })
 
+app.post("/client/v1/link/:source", async (req, res) => {
+    var s = {
+        "discord": "https://discord.com/invite/HCmvsEQ",
+        "twitter": "https://twitter.com/PlayValorantDEU",
+        "twitch": "https://www.twitch.tv/"
+    }
+    shell.openExternal(s[req.params.source])
+    res.send(200)
+})
+
 app.post("/client/v1/restart", async (req, res) => {
     eapp.relaunch()
     eapp.exit()
@@ -151,21 +162,8 @@ app.get("/client/v1/status", async (req, res) => {
                 bset = true
             }
         }
-        bset == false ? res.send("404") : res.send("200")
+        bset == false ? res.status(404).send("404") : res.status(200).send("200")
     })
-})
-
-app.post("/client/v1/launch", async (req, res) => {
-    var status
-    exec(`C:/Riot Games/Riot Client/RiotClientServices.exe`, ["--launch-product=valorant", "--launch-patchline=live", "--insecure", "--app-port=12345"], function(err, data) {  
-        console.log(err, data)
-        if(err) {
-            status = 400
-        } else {
-            status = 200
-        }
-    })
-    res.send(status)
 })
 
 app.listen(42069, () => {console.log("API Online")})

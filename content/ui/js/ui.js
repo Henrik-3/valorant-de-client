@@ -33,14 +33,36 @@
     }, 10000)
 })*/
 
-document.querySelector("#launchvalorant").addEventListener("click", async () => {
-    async function restart() {
-        var response = await fetch("http://127.0.0.1:42069/client/v1/restart", {
+document.querySelector("#discordlink").addEventListener("click", async () => {
+    console.log("keke")
+    async function open() {
+        var response = await fetch("http://127.0.0.1:42069/client/v1/link/discord", {
+            method: "POST"
+        })
+        console.log(response)
+        return response
+    }
+    open()
+})
+
+document.querySelector("#twitterlink").addEventListener("click", async () => {
+    async function open() {
+        var response = await fetch("http://127.0.0.1:42069/client/v1/link/twitter", {
             method: "POST"
         })
         return response
     }
-    restart()
+    open()
+})
+
+document.querySelector("#twitchlink").addEventListener("click", async () => {
+    async function open() {
+        var response = await fetch("http://127.0.0.1:42069/client/v1/link/twitch", {
+            method: "POST"
+        })
+        return response
+    }
+    open()
 })
 
 var created = false
@@ -60,9 +82,39 @@ document.querySelector("#createlobby").addEventListener("click", async () => {
             created = true
             document.getElementById("createlobby").innerHTML = "Lobby erstellt"
             document.getElementById("createlobby").style.cssText = "color:#fff;background-color:#696969"
-            document.getElementById("partyid").innerHTML = data_data.party_id
+            var div1 = document.createElement("div")
+            div1.className = "input-group no-border input-lg"
+            div1.style.cssText = "margin-top:20px"
+            var div2 = document.createElement("div")
+            div2.className = "input-group-prepend"
+            var span = document.createElement("span")
+            span.className = "input-group-text"
+            var i = document.createElement("i")
+            i.className = "fas fa-fingerprint"
+            i.style.cssText = "color:white"
+            var input = document.createElement("input")
+            input.type = "text"
+            input.className = "form-control"
+            input.placeholder = "Party ID"
+            input.id = "createlobbyid"
+            input.readOnly = true
+            input.value = data_data.party_id
+            span.append(i)
+            div2.append(span)
+            div1.append(div2)
+            div1.append(input)
+            document.getElementById("partyid").append(div1)
+            //document.getElementById("createpartyid").innerHTML = data_data.party_id
+            setTimeout(function() {
+                created = false
+                document.getElementById("createlobby").innerHTML = "Erstelle Lobby"
+                document.getElementById("createlobby").style.cssText = ""
+            }, 5000)
         } else {
             document.getElementById("createlobby").innerHTML = "Fehler bei der Lobby Erstellung, stelle sicher dass du VALORANT offen hast"
+            setTimeout(function() {
+                document.getElementById("createlobby").innerHTML = "Erstelle Lobby"
+            }, 5000)
         }
     }
 })

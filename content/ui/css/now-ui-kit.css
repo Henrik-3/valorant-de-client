@@ -58,6 +58,140 @@ html {
   margin-left: 50px;
   padding: 1px 16px;
   height: 100%;
+  background-color: #2d3436;
+  background-image: linear-gradient(135deg, #2d3436 0%, #000000 74%);
+  background-size: 100%;
+}
+
+@font-face {
+  font-family: "DIN Next LT Pro Bold";
+  src: url(DINNextLTPro-Bold.ttf);
+}
+
+@font-face {
+  font-family: "VALORANT";
+  src: url(valorant_font.ttf);
+}
+
+:root {
+  --v-red: #ff4655;
+  --v-white: #ece8e1;
+  --v-black: #0f1923;
+  --v-outline: rgba(236, 232, 225, 0.5);
+}
+
+.outline {
+  color: var(--v-white);
+  height: 75px;
+}
+
+.outline .label::before,
+.outline .label::after {
+  border: 1px solid var(--v-outline);
+}
+
+.hover-effect {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 120%;
+  top: 0;
+  left: -5%;
+  z-index: 1;
+  background-color: var(--v-red);
+  transform: translateX(-100%) skew(-10deg);
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+buttonz:hover .hover-effect {
+  transform: translateX(0) skew(-10deg);
+}
+
+/* Label Text */
+.label-text2 {
+  position: relative;
+  display: block;
+  padding: 0.9rem 3rem;
+  background-color: transparent;
+  z-index: 1;
+  text-align: center;
+}
+
+.label-text2:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0.8rem;
+  width: 0.8rem;
+  right: 0;
+  bottom: 0;
+  background-color: var(--v-black);
+  transition: background-color 0.2s ease-in;
+}
+buttonz:hover .label-text:after {
+  background-color: var(--v-white);
+}
+
+buttonz {
+  font-family: "DIN Next LT Pro Bold";
+  font-weight: 400;
+  width: 100%;
+  margin-top: 1rem;
+  position: relative;
+  display: block;
+  font-size: 1rem;
+  padding: 0.7rem;
+  border: 0;
+  text-transform: uppercase;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--v-white);
+}
+
+buttonz:hover {
+  color: var(--v-white);
+}
+
+buttonz::before,
+buttonz::after {
+  background-color: transparent;
+  content: "";
+  display: block;
+  position: absolute;
+  height: calc(50% - 0.4rem);
+  width: 100%;
+  border: 1px solid var(--v-outline);
+  left: 0;
+}
+
+buttonz::before {
+  border-bottom: 0;
+  top: 0;
+}
+
+buttonz::after {
+  border-top: 0;
+  bottom: 0;
+}
+
+/* LABEL  */
+.label {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  height: 50px;
+}
+
+.label:before {
+  content: "";
+  height: 100%;
+  display: block;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
 }
 
 .bootstrap-switch {
@@ -3712,8 +3846,6 @@ p {
 }
 
 body {
-  background-image: linear-gradient(rgba(253,92,81,255), rgba(192,16,103,255));
-  background-size: 100%;
   color: #2c2c2c;
   font-size: 14px;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;

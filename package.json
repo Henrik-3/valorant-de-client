@@ -1,13 +1,13 @@
 {
     "name": "valorant-de-client",
-    "productName": "VALORANT DE Client | v0.2.1 b1",
-    "version": "0.2.1",
+    "productName": "VALORANT DE Client | v0.2.2 b3",
+    "version": "0.2.2",
     "author": "HenrikDev",
     "description": "---",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "packager": "electron-packager ./ --production --asar --overwrite"
+        "packager": "electron-packager ./ --overwrite --asar --icon=content/backend/VALORANT_D_TRANSPARENT.png --out=release-builds --ignore=release-builds"
     },
     "dependencies": {
         "axios": "^0.21.1",
