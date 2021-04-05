@@ -1,3 +1,5 @@
 node_modules/
 config/config.json
 release-builds/
+electron-builder.yml
+dist

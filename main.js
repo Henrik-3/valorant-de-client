@@ -4,6 +4,8 @@ const load = require("./content/backend/load.js")
 const api = require("./content/backend/api.js")
 const util = require("util")
 const exectasklist = util.promisify(require('child_process').exec)
+const { autoUpdater } = require('electron-updater');
+autoUpdater.autoDownload = true
 
 app.disableHardwareAcceleration()
 app.on("ready", async () => {
@@ -14,8 +16,18 @@ app.on("ready", async () => {
         webPreferences: {
             nodeIntegration: true
         },
+        show: false
     })
-    //win.setResizable(false)
+    splash = new BrowserWindow({width: 256, height: 256, transparent: true, frame: false, alwaysOnTop: true});
+    splash.loadURL(`./content/ui/splash.html`);
+
+    autoUpdater.on("update-available", () => {
+
+    })
+    autoUpdater.on("update-not-available", () => {
+        splash.destroy()
+        win.show()
+    })
     win.setMenuBarVisibility(false)
     //win.loadFile("./content/ui/functional.html")
     await exectasklist("tasklist", (error, stdout, stderr) => {
@@ -29,6 +41,7 @@ app.on("ready", async () => {
         }
         bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
     })
+    autoUpdater.checkForUpdatesAndNotify();
 })
 
 app.on("window-all-closed", () => {
@@ -38,3 +51,10 @@ app.on("window-all-closed", () => {
 app.on("quit", () => {
     app.quit()
 })
+
+autoUpdater.on('update-available', () => {
+    mainWindow.webContents.send('update_available');
+  });
+autoUpdater.on('update-downloaded', () => {
+    mainWindow.webContents.send('update_downloaded');
+});
