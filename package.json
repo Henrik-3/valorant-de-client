@@ -1,13 +1,12 @@
 {
     "name": "valorant-de-client",
-    "productName": "VALORANT DE Client | v0.3 b2",
-    "version": "0.3.0",
-    "author": "HenrikDev",
-    "description": "---",
+    "productName": "VALORANT DE Client | v0.3.2 b1",
+    "version": "0.3.2",
+    "author": "VALORANT DE Entwickler Team",
+    "description": "VALORANT DE Desktop Client",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "packager": "electron-packager ./ --overwrite --asar --icon=content/backend/VALORANT_D_TRANSPARENT.png --out=release-builds --ignore=release-builds",
         "build": "electron-builder build --win --publish never",
         "deploy": "electron-builder build --win --publish always"
     },

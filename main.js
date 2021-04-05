@@ -16,7 +16,7 @@ app.on("ready", async () => {
         webPreferences: {
             nodeIntegration: true
         },
-        show: false
+        show:false 
     })
     win.setMenuBarVisibility(false)
     //win.loadFile("./content/ui/functional.html")
@@ -24,51 +24,48 @@ app.on("ready", async () => {
     splash.loadFile(`./content/ui/splash.html`);
 
     autoUpdater.on("update-available", async () => {
-        splash.destroy()
-        win.show()
-        await exectasklist("tasklist", (error, stdout, stderr) => {
-            if(error) return
-            var tasks = stdout.toString().split("\n")
-            var bset = false
-            for(let i = 0; tasks.length > i; i++) {
-                if(tasks[i].includes("VALORANT-Win64-Shipping")) {
-                    bset = true
-                }
-            }
-            bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
+        autoUpdater.on("update-downloaded", async () => {
+            autoUpdater.quitAndInstall();
         })
     })
     autoUpdater.on("update-not-available", async () => {
-        splash.destroy()
-        win.show()
-        await exectasklist("tasklist", (error, stdout, stderr) => {
-            if(error) return
-            var tasks = stdout.toString().split("\n")
-            var bset = false
-            for(let i = 0; tasks.length > i; i++) {
-                if(tasks[i].includes("VALORANT-Win64-Shipping")) {
-                    bset = true
+        console.log("test")
+        setTimeout(async () => {
+            splash.destroy()
+            win.show()
+            await exectasklist("tasklist", (error, stdout, stderr) => {
+                if(error) return
+                var tasks = stdout.toString().split("\n")
+                var bset = false
+                for(let i = 0; tasks.length > i; i++) {
+                    if(tasks[i].includes("VALORANT-Win64-Shipping")) {
+                        bset = true
+                    }
                 }
-            }
-            bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
-        })
+                bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
+            })
+            setInterval(async () => {
+                await exectasklist("tasklist", (error, stdout, stderr) => {
+                    if(error) return
+                    var tasks = stdout.toString().split("\n")
+                    var bset = false
+                    for(let i = 0; tasks.length > i; i++) {
+                        if(tasks[i].includes("VALORANT-Win64-Shipping")) {
+                            bset = true
+                        }
+                    }
+                    if(bset == false) {
+                        app.quit()
+                    }
+                })
+            }, 60000)
+        }, 5000)
     })
 
     autoUpdater.on("error", async (error) => {
         console.log(error)
         splash.destroy()
         win.show()
-        await exectasklist("tasklist", (error, stdout, stderr) => {
-            if(error) return
-            var tasks = stdout.toString().split("\n")
-            var bset = false
-            for(let i = 0; tasks.length > i; i++) {
-                if(tasks[i].includes("VALORANT-Win64-Shipping")) {
-                    bset = true
-                }
-            }
-            bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
-        })
     })
     autoUpdater.checkForUpdatesAndNotify();
 })
@@ -80,10 +77,3 @@ app.on("window-all-closed", () => {
 app.on("quit", () => {
     app.quit()
 })
-
-autoUpdater.on('update-available', () => {
-    mainWindow.webContents.send('update_available');
-});
-autoUpdater.on('update-downloaded', () => {
-    mainWindow.webContents.send('update_downloaded');
-});
