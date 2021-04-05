@@ -18,28 +18,57 @@ app.on("ready", async () => {
         },
         show: false
     })
-    splash = new BrowserWindow({width: 256, height: 256, transparent: true, frame: false, alwaysOnTop: true});
-    splash.loadURL(`./content/ui/splash.html`);
-
-    autoUpdater.on("update-available", () => {
-
-    })
-    autoUpdater.on("update-not-available", () => {
-        splash.destroy()
-        win.show()
-    })
     win.setMenuBarVisibility(false)
     //win.loadFile("./content/ui/functional.html")
-    await exectasklist("tasklist", (error, stdout, stderr) => {
-        if(error) return
-        var tasks = stdout.toString().split("\n")
-        var bset = false
-        for(let i = 0; tasks.length > i; i++) {
-            if(tasks[i].includes("VALORANT-Win64-Shipping")) {
-                bset = true
+    const splash = new BrowserWindow({width: 200, height: 200, frame: false, alwaysOnTop: true, show: true, transparent: true, webPreferences: {nodeIntegration: true},});
+    splash.loadFile(`./content/ui/splash.html`);
+
+    autoUpdater.on("update-available", async () => {
+        splash.destroy()
+        win.show()
+        await exectasklist("tasklist", (error, stdout, stderr) => {
+            if(error) return
+            var tasks = stdout.toString().split("\n")
+            var bset = false
+            for(let i = 0; tasks.length > i; i++) {
+                if(tasks[i].includes("VALORANT-Win64-Shipping")) {
+                    bset = true
+                }
             }
-        }
-        bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
+            bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
+        })
+    })
+    autoUpdater.on("update-not-available", async () => {
+        splash.destroy()
+        win.show()
+        await exectasklist("tasklist", (error, stdout, stderr) => {
+            if(error) return
+            var tasks = stdout.toString().split("\n")
+            var bset = false
+            for(let i = 0; tasks.length > i; i++) {
+                if(tasks[i].includes("VALORANT-Win64-Shipping")) {
+                    bset = true
+                }
+            }
+            bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
+        })
+    })
+
+    autoUpdater.on("error", async (error) => {
+        console.log(error)
+        splash.destroy()
+        win.show()
+        await exectasklist("tasklist", (error, stdout, stderr) => {
+            if(error) return
+            var tasks = stdout.toString().split("\n")
+            var bset = false
+            for(let i = 0; tasks.length > i; i++) {
+                if(tasks[i].includes("VALORANT-Win64-Shipping")) {
+                    bset = true
+                }
+            }
+            bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
+        })
     })
     autoUpdater.checkForUpdatesAndNotify();
 })
@@ -54,7 +83,7 @@ app.on("quit", () => {
 
 autoUpdater.on('update-available', () => {
     mainWindow.webContents.send('update_available');
-  });
+});
 autoUpdater.on('update-downloaded', () => {
     mainWindow.webContents.send('update_downloaded');
 });
