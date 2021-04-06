@@ -7,9 +7,9 @@
     <body>
         <div class="sidebar-val-client">
             <a href="#" type="button" style="text-decoration: none;width: 50px;"><i class="fas fa-house-user active"></i></a>
-            <a href="#" style="text-decoration: none;pointer-events: none;"><i class="fas fa-cogs"></i></a>
+            <a href="settings.html" style="text-decoration: none;"><i class="fas fa-cogs"></i></a>
         </div>
-        <div class="content-val-client">
+        <div class="content-val-client" id="content-val-client-id">
             <div style="width: 95%;text-align: right;margin-top: 20px;">
                 <a id="discordlink" type="button"><i class="fab fa-discord" style="color: #fff;font-size: 22px;"></i></a>
                 <a id="twitterlink" type="button"><i class="fab fa-twitter" style="color: #fff;font-size: 22px;margin-left: 20px;"></i></a>
@@ -86,11 +86,22 @@
             </div>
         </div>
     </body>
-    <script>
-    </script>
-    <script src="js/core/jquery.min.js" type="text/javascript"></script>
-    <script src="js/core/popper.min.js" type="text/javascript"></script>
-    <script src="js/core/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/now-ui-kit.js" type="text/javascript"></script>
     <script src="js/ui.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.$ = window.jQuery = require('jquery'); // not sure if you need this at all
+        window.Bootstrap = require('bootstrap');
+        const settings = require("electron-settings")
+        async function applySettings() {
+            var current_settings = await settings.get()
+            console.log(current_settings.theme)
+            if(current_settings.theme != null) {
+                var themes = {
+                    "darkthemeoption": "background-color: #2d3436;background-image: linear-gradient(135deg, #2d3436 0%, #000000 74%);"
+                }
+                current_settings.theme.name != "valorantthemeoption" ? document.getElementById("content-val-client-id").style.cssText = themes[current_settings.theme.name] : null
+            }
+        }
+        applySettings()
+    </script>
 </html>

@@ -8,6 +8,10 @@ const eapp = require('electron').app
 const util = require("util")
 const exectasklist = util.promisify(require('child_process').exec)
 const shell = require('electron').shell
+const settings = require("electron-settings")
+var cors = require('cors')
+
+app.use(cors())
 
 app.get("/ingame/v1/join/:id", async (req, res) => {
     var id = req.params.id
@@ -133,7 +137,7 @@ app.get("/ingame/v1/create", async (req, res) => {
 })
 
 app.get("/client/v1/settings", async (req, res) => {
-
+    res.status(200).send(await settings.get())
 })
 
 app.post("/client/v1/link/:source", async (req, res) => {

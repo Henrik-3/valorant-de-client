@@ -1,7 +1,7 @@
 {
     "name": "valorant-de-client",
-    "productName": "VALORANT DE Client | v0.3.2 b1",
-    "version": "0.3.2",
+    "productName": "VALORANT-DE-Client",
+    "version": "0.3.3",
     "author": "VALORANT DE Entwickler Team",
     "description": "VALORANT DE Desktop Client",
     "main": "main.js",
@@ -12,9 +12,14 @@
     },
     "dependencies": {
         "axios": "^0.21.1",
+        "bootstrap": "^4.6.0",
+        "cors": "^2.8.5",
         "discord-rich-presence": "0.0.8",
+        "electron-settings": "^4.0.2",
         "electron-updater": "^4.3.8",
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "jquery": "^3.6.0",
+        "popper.js": "^1.16.1"
     },
     "devDependencies": {
         "electron": "^12.0.2",

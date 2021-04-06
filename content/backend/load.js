@@ -66,7 +66,16 @@ var maps = {
     '/Game/Maps/Duality/Duality': "Bind",
     '/Game/Maps/Bonsai/Bonsai': "Split",
     '/Game/Maps/Port/Port': "Icebox",
-    "/Game/Maps/Ascent/Ascent": "Ascent"
+    "/Game/Maps/Ascent/Ascent": "Ascent",
+    "/Game/Maps/Poveglia/Range": "The Range"
+}
+var maps2 = {
+    '/Game/Maps/Triad/Triad': "Haven",
+    '/Game/Maps/Duality/Duality': "Bind",
+    '/Game/Maps/Bonsai/Bonsai': "Split",
+    '/Game/Maps/Port/Port': "Icebox",
+    "/Game/Maps/Ascent/Ascent": "Ascent",
+    "/Game/Maps/Poveglia/Range": "Range"
 }
 var mode = {
     "": "Custom Games",
@@ -87,10 +96,8 @@ var rpcycle = setInterval(async () => {
         var ingamedata = Buffer(presencefilter[0].private, "base64").toString("ascii")
         var jsondata = JSON.parse(ingamedata)
         if(jsondata.sessionLoopState == "MENUS") {
-            var possible_party_size
-            jsondata.queueId == "" ? possible_party_size = 10 : possible_party_size = 5
-            var is_idle
-            jsondata.isIdle == false ? is_idle = `In Lobby (${mode[jsondata.queueId]})` : is_idle = "AFK"
+            var possible_party_size = jsondata.queueId == "" ? 10 : 5
+            var is_idle = jsondata.isIdle == false ? `In Lobby (${mode[jsondata.queueId]})` : "AFK"
             client.updatePresence({
                 state: "Party Size",
                 details: is_idle,
@@ -101,11 +108,12 @@ var rpcycle = setInterval(async () => {
                 instance: true
             })
         } else {
+            console.log(jsondata.matchMap)
             client.updatePresence({
                 state: `${maps[jsondata.matchMap]} ${jsondata.partyOwnerMatchScoreAllyTeam} - ${jsondata.partyOwnerMatchScoreEnemyTeam}`,
-                details: states[jsondata.sessionLoopState],
+                details: states[jsondata.sessionLoopState] + ` (${mode[jsondata.queueId]})`,
                 startTimestamp: startTime,
-                largeImageKey: maps[jsondata.matchMap].toLowerCase(),
+                largeImageKey: maps2[jsondata.matchMap].toLowerCase(),
                 largeImageText: maps[jsondata.matchMap],
                 instance: true
             })

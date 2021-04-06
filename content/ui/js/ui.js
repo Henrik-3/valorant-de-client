@@ -34,7 +34,6 @@
 })*/
 
 document.querySelector("#discordlink").addEventListener("click", async () => {
-    console.log("keke")
     async function open() {
         var response = await fetch("http://127.0.0.1:42069/client/v1/link/discord", {
             method: "POST"

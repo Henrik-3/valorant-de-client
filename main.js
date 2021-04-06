@@ -8,15 +8,18 @@ const { autoUpdater } = require('electron-updater');
 autoUpdater.autoDownload = true
 
 app.disableHardwareAcceleration()
+
 app.on("ready", async () => {
     const win = new BrowserWindow({
         width: 1000,
         height: 600,
         icon: "./content/backend/VALORANT_D_TRANSPARENT.png",
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true
         },
-        show:false 
+        show: false
     })
     win.setMenuBarVisibility(false)
     //win.loadFile("./content/ui/functional.html")
