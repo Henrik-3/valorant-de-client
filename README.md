@@ -5,6 +5,11 @@ VALORANT Desktop Client made for the [VALORANT DE Server](https://discord.gg/HCm
 Installer Exe: https://www.virustotal.com/gui/file/93aec108ccdb2ea7bc8ed0dbd18f47a99a846420a917e7a2f62abf7c513b6a0b/detection
 Client Exe: https://www.virustotal.com/gui/file-analysis/ZTBiYzcxODVjZWUyMjQ5YzViNjdiNDg3YTRkNzVjOTk6MTYxNzYyMjk1OQ==/detection
 
+# Resource Usage (typical)
+- CPU: 0.3% (Ryzen 9 5900X)
+- RAM: 50-70MB
+- Storage: 200MB
+
 # Features
 - Discord Rich Embed Support for VALORANT
 - Join into Partys over ID without beeing Friends with that person
