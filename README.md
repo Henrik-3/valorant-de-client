@@ -18,8 +18,10 @@ Client Exe: https://www.virustotal.com/gui/file-analysis/ZTBiYzcxODVjZWUyMjQ5YzV
 
 # Images
 There will be a new design in the future
-![image](https://user-images.githubusercontent.com/43936184/113598888-163a7280-963e-11eb-8d70-0802d05ff4a3.png)
 ![image](https://user-images.githubusercontent.com/43936184/113598903-1c305380-963e-11eb-8701-d2402e9f2357.png)
+![image](https://user-images.githubusercontent.com/43936184/113888231-722e0400-97c2-11eb-9edb-8056e32ddb00.png)
+![image](https://user-images.githubusercontent.com/43936184/113888159-5f1b3400-97c2-11eb-9e5d-7c1b81c579ce.png)
+
 
 
 
