@@ -3,6 +3,7 @@ VALORANT Desktop Client made for the [VALORANT DE Server](https://discord.gg/HCm
 
 # Virus Scans
 Installer Exe: https://www.virustotal.com/gui/file/93aec108ccdb2ea7bc8ed0dbd18f47a99a846420a917e7a2f62abf7c513b6a0b/detection
+
 Client Exe: https://www.virustotal.com/gui/file-analysis/ZTBiYzcxODVjZWUyMjQ5YzViNjdiNDg3YTRkNzVjOTk6MTYxNzYyMjk1OQ==/detection
 
 # Resource Usage (typical)
