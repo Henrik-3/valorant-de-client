@@ -1,5 +1,5 @@
 # VALORANT DE Client
-VALORANT Desktop Client made for the [VALORANT DE Server](https://discord.gg/HCmvsEQ) inspired by RumbleMike's [ValorScrim](https://github.com/RumbleMike/ValorScrim) Programm
+VALORANT Desktop Client made for the [VALORANT DE Server](https://discord.gg/HCmvsEQ) inspired by RumbleMike's [ValorScrim](https://github.com/RumbleMike/ValorScrim) Program
 
 # Virus Scans
 Installer Exe: https://www.virustotal.com/gui/file/93aec108ccdb2ea7bc8ed0dbd18f47a99a846420a917e7a2f62abf7c513b6a0b/detection
