@@ -5,6 +5,7 @@ const config = require("../../config/config.json")
 const { default: axios } = require("axios")
 const { response } = require("express")
 const client = require("discord-rich-presence")(config.clientid)
+const fs = require("fs")
 
 async function getValoStatus() {
     var status
@@ -67,22 +68,17 @@ var maps = {
     '/Game/Maps/Bonsai/Bonsai': "Split",
     '/Game/Maps/Port/Port': "Icebox",
     "/Game/Maps/Ascent/Ascent": "Ascent",
-    "/Game/Maps/Poveglia/Range": "The Range"
-}
-var maps2 = {
-    '/Game/Maps/Triad/Triad': "Haven",
-    '/Game/Maps/Duality/Duality': "Bind",
-    '/Game/Maps/Bonsai/Bonsai': "Split",
-    '/Game/Maps/Port/Port': "Icebox",
-    "/Game/Maps/Ascent/Ascent": "Ascent",
-    "/Game/Maps/Poveglia/Range": "Range"
+    "/Game/Maps/Poveglia/Range": "Range",
+    "/Game/Maps/Foxtrot/Foxtrot": "Breeze"
 }
 var mode = {
     "": "Custom Games",
     "unrated": "Ungewertet",
     "spikerush": "Spike Rush",
     "ggteam": "Escalation",
-    "competitive": "Gewertet"
+    "competitive": "Gewertet",
+    "onefa": "Klonprogramm",
+    "deathmatch": "Deathmatch"
 }
 var states = {
     "PREGAME": "Agent Selection",
@@ -113,7 +109,7 @@ var rpcycle = setInterval(async () => {
                 state: `${maps[jsondata.matchMap]} ${jsondata.partyOwnerMatchScoreAllyTeam} - ${jsondata.partyOwnerMatchScoreEnemyTeam}`,
                 details: states[jsondata.sessionLoopState] + ` (${mode[jsondata.queueId]})`,
                 startTimestamp: startTime,
-                largeImageKey: maps2[jsondata.matchMap].toLowerCase(),
+                largeImageKey: maps[jsondata.matchMap].toLowerCase(),
                 largeImageText: maps[jsondata.matchMap],
                 instance: true
             })

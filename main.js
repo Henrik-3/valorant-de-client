@@ -3,10 +3,9 @@ const path = require("path")
 const load = require("./content/backend/load.js")
 const api = require("./content/backend/api.js")
 const util = require("util")
-const exectasklist = util.promisify(require('child_process').exec)
+const exec = require('child_process').exec
 const { autoUpdater } = require('electron-updater');
 autoUpdater.autoDownload = true
-
 app.disableHardwareAcceleration()
 
 app.on("ready", async () => {
@@ -22,7 +21,22 @@ app.on("ready", async () => {
         show: false
     })
     win.setMenuBarVisibility(false)
-    //win.loadFile("./content/ui/functional.html")
+    /*win.loadFile("./content/ui/functional.html")
+    ws.on("connect", async (connection) => {
+        connection.send("[5, \"OnJsonApiEvent\"]")
+        console.log("connected")
+        connection.on("error", async (error) => {
+            console.log(error)
+        })
+        connection.on("message", async (msg) => {
+            console.log(msg)
+        })
+    })
+    ws.on('connectFailed', function(error) {
+        console.log('Connect Error: ' + error.toString());
+    });
+    var kek = Buffer.from(`LOGIN-TOKEN`, 'utf8').toString('base64');
+    ws.connect("wss://127.0.0.1:12345", "wamp", {Authorization: "Basic " + kek}) */
     const splash = new BrowserWindow({width: 200, height: 200, frame: false, alwaysOnTop: true, show: true, transparent: true, webPreferences: {nodeIntegration: true},});
     splash.loadFile(`./content/ui/splash.html`);
 
@@ -32,11 +46,9 @@ app.on("ready", async () => {
         })
     })
     autoUpdater.on("update-not-available", async () => {
-        console.log("test")
-        setTimeout(async () => {
             splash.destroy()
             win.show()
-            await exectasklist("tasklist", (error, stdout, stderr) => {
+            exec("tasklist", (error, stdout, stderr) => {
                 if(error) return
                 var tasks = stdout.toString().split("\n")
                 var bset = false
@@ -48,7 +60,7 @@ app.on("ready", async () => {
                 bset == false ? win.loadFile("./content/ui/error.html") : win.loadFile("./content/ui/functional.html")
             })
             setInterval(async () => {
-                await exectasklist("tasklist", (error, stdout, stderr) => {
+                exec("tasklist", (error, stdout, stderr) => {
                     if(error) return
                     var tasks = stdout.toString().split("\n")
                     var bset = false
@@ -57,12 +69,12 @@ app.on("ready", async () => {
                             bset = true
                         }
                     }
+                    console.log(bset)
                     if(bset == false) {
-                        app.quit()
+                        app.exit()
                     }
                 })
-            }, 60000)
-        }, 5000)
+            }, 10000)
     })
 
     autoUpdater.on("error", async (error) => {

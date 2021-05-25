@@ -1,7 +1,7 @@
 {
     "name": "valorant-de-client",
     "productName": "VALORANT-DE-Client",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "author": "VALORANT DE Entwickler Team",
     "description": "VALORANT DE Desktop Client",
     "main": "main.js",
@@ -19,7 +19,8 @@
         "electron-updater": "^4.3.8",
         "express": "^4.17.1",
         "jquery": "^3.6.0",
-        "popper.js": "^1.16.1"
+        "popper.js": "^1.16.1",
+        "websocket": "^1.0.34"
     },
     "devDependencies": {
         "electron": "^12.0.2",
@@ -32,6 +33,7 @@
     "build": {
         "win": {
             "icon": "content/backend/VALORANT_D_TRANSPARENT.ico"
-        }
+        },
+        "compression": "maximum"
     }
 }
