@@ -12,9 +12,11 @@ Client Exe: https://www.virustotal.com/gui/file-analysis/ZTBiYzcxODVjZWUyMjQ5YzV
 - Storage: 200MB
 
 # Features
-- Discord Rich Embed Support for VALORANT
+- Discord Rich Presence Support for VALORANT
 - Join into Partys over ID without beeing Friends with that person
 - Auto Update, no manual update is needed
+- Penalty Data
+- Starting VALORANT over the client
 - (Later: Option to add your Party ID into an open LFG Side)
 
 # Images
